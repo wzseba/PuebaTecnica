@@ -4,6 +4,17 @@ import java.util.Scanner;
 
 public class ReservaDeAsientos {
 	
+	static void mostrarMapaAsientos(char asientos[][]) {
+		
+		for (int f = 0; f < asientos.length; f++) {
+			System.out.print(f + " ");
+			for (int a = 0; a < asientos.length; a++) {
+				System.out.print("[" + asientos[f][a] + "] ");
+			}
+			System.out.println("");
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		
@@ -19,8 +30,11 @@ public class ReservaDeAsientos {
 		// Variable para cortar bucle
 		String respuesta;
 		
+		// Variable para ver mapa de asients
+		String verAsientos;
+		
 		// Variables de lectura
-		int fila, asiento;
+		int fila = 0, asiento = 0;
 		
 		// Cargar matriz "L"
 		for (int f = 0; f < asientos.length; f++) {
@@ -31,11 +45,20 @@ public class ReservaDeAsientos {
 		
 		System.out.println("---- Reserva de asientos ----");
 		
-		while(bandera != true) {
-			System.out.println("--- Ingresar fila y asiento a reservar ---");
+		while(bandera != true) {			
+			
+			// En caso de que un cliente solicite visualizar cuales son los asientos libre
+			System.out.print("Desea ver asientos disponibles? 'S': si cualquier tecla 'NO': ");
+			verAsientos = input.next();
+			
+			if(verAsientos.equalsIgnoreCase("S")) {				
+				mostrarMapaAsientos(asientos);
+			}
+		
+			System.out.println("\n--- Ingresar fila y asiento a reservar ---");
 			
 			// Cargar fila por consola
-			System.out.print("ingresar fila: ");
+			System.out.print("\n\ningresar fila: ");
 			fila = input.nextInt();
 			
 			System.out.println("");
@@ -44,7 +67,7 @@ public class ReservaDeAsientos {
 			System.out.print("ingrese asiento: ");
 			asiento = input.nextInt();
 			
-			// Comparacion de caracter
+			// Comparacion de caracter(primitivo)
 			if(asientos[fila][asiento] == 'L') {
 				asientos[fila][asiento] = 'X';
 				System.out.println("Asiento reservado correctamete");
