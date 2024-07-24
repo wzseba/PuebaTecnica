@@ -55,28 +55,44 @@ public class ReservaDeAsientos {
 				mostrarMapaAsientos(asientos);
 			}
 		
-			System.out.println("\n--- Ingresar fila y asiento a reservar ---");
+			System.out.println("--- Ingresar fila y asiento a reservar ---");
 			
-			// Cargar fila por consola
-			System.out.print("\n\ningresar fila: ");
-			fila = input.nextInt();
 			
-			System.out.println("");
 			
-			// Cargar asiento por consola
-			System.out.print("ingrese asiento: ");
-			asiento = input.nextInt();
+			// No se permite sobreventa
+			boolean estado = false;
+			while(!estado) {
+				
+				// Cargar fila por consola
+				System.out.print("\n\ningresar fila: ");
+				fila = input.nextInt();
+				
+				// Cargar asiento por consola
+				System.out.print("ingrese asiento: ");
+				asiento = input.nextInt();				
+				
+				
+				if(fila >= 0 && fila <= 9) {
+					if(asiento >= 0 && asiento <= 9) {						
+						estado = true;
+					}else {
+						System.out.println("Asiento fuera de rango deberia ser entre 0 y 9");
+					}
+				}else {
+					System.out.println("Fila fuera de rango deberia ser entre 0 y 9");
+				}
+			}
 			
-			// Comparacion de caracter(primitivo)
+			// Reserva de asientos. Comparacion de caracter(primitivo)
 			if(asientos[fila][asiento] == 'L') {
 				asientos[fila][asiento] = 'X';
-				System.out.println("Asiento reservado correctamete");
+				System.out.println("Asiento reservado correctamente");
 			}else {
 				System.out.println("Asiento ocupado");
 			}
 			
 			// Pregunta para terminar bucle
-			System.out.println("¿Finalizar reserva?... 'S': si cualquier tecla No");
+			System.out.print("¿Finalizar reserva?... 'S': si cualquier tecla No: ");
 			respuesta = input.next();
 			
 			// Modificar bandera comparacion con equals en String(objeto)
